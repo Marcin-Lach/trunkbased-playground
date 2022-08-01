@@ -4,7 +4,43 @@ This repo is to verify some operations before deciding on using TBD in commercia
 
 ## More info
 
-<https://trunkbaseddevelopment.com/>
+Extensive overview can be found on [trunkbaseddevelopment.com](https://trunkbaseddevelopment.com/).
+
+### Branching and releasing
+
+Most complicated scenario is when you need to support customers on multiple versions.
+This happens when you offer both on-prem and SaaS solution.
+
+For this case, we can use following rules:
+
+1. Tags must follow semantic versioning to provide information about expected breaking changes between versions.
+1. Every major and minor bump should be done on `main` branch
+1. Every hotfix should be taged on proper release branch
+1. If a hotfix is needed, it should be implemented on main, then a branch from specific tag should be created (if does not exist already) and hotifx should be cherry-picked from main to the release branch. Then tag should be created on release branch.
+Example:
+    - tag 0.1.0 was created on main and version was released
+    - development on main is constantly flowing
+    - hotfix for release 0.1.0 is required
+    - hotfix is implemented on main
+    - branch r/0.1.x is created from tag 0.1.0
+    - hotfix is cherry-picked from main to branch r/0.1.x
+    - `git describe --tags` is executed to suggest what next tag should be (result is something similar to `0.1.0-1-ge94280e` which says that from last know tag - `0.1.0` - 1 commit was added)
+    - tag is created on r/0.1.x branch and release can be created
+
+1. In case of conflicts/compatilibity issues while cherry-picking, fix can be implemented directly on release branch, should be tagged there and should not be merged anywhere.
+
+### Upgrading from old version to not-newest version
+
+Let's assume that customer still uses some old version (let's say from tag 0.1.3, meaning this version has already been patched 3 times). Lastest release is 0.4.0 and we should strongly suggest it as the go-to version when upgrading customer. But customer realy wants to just update to version 0.2.0.
+
+In such case, we should identify changes, that are different between those versions and carefully apply hotfixes implemented on r/0.1.x to branch r/0.2.x. Regression is highly probable - some new version of a feature could be present on 0.2.0 that could be overwritten by cherry-picking changes from 0.1.3. Something that was fixed in one of patches to 0.1.x version could also be missing in 0.2.x version.
+
+We can use `git log` with [double-dot operator](https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#_commit_ranges) to differences. It should be done in both ways, to show changes that are on 0.2.0 and not on 0.1.3, and also changes that are on 0.1.3 and are not on 0.2.0.
+
+```js
+git log 0.1.3..0.2.0 # show what's on 0.2.0 that is not on 0.1.3
+git log 0.2.0..0.1.3 # show what's on 0.1.3 that is not on 0.2.0
+```
 
 ## Sequence of operations done in this repo
 
@@ -17,15 +53,19 @@ This repo is to verify some operations before deciding on using TBD in commercia
 1. cherry-pick hotfix to r/0.1.x branch, tag as 0.1.2
 1. create branch r/0.3.x from 0.3.0 tag, cherry pick hotfix from main to r/0.3.x, tag as 0.3.1
 1. add some more commits on main
-1. cherry-pick last commit from main to r/0.1.x, create tag 0.1.3 on branch r/0.1.x
+1. cherry-pick last commit from main to r/0.1.x, create tag 0.1.3 on branch r/0.1.x (with merge conflict - this is the same as if a feature was required on old version)
 
 ```js
 ❯ git reflog
 
-2cff2e6 (HEAD -> main, origin/main) HEAD@{0}: commit: changed readme.md to utf-8
-ed77465 HEAD@{1}: commit: added git attributes
-fd6d347 HEAD@{2}: checkout: moving from r/0.3.x to main
-b0a2455 (tag: 0.3.1, origin/r/0.3.x, r/0.3.x) HEAD@{3}: cherry-pick: hotfixing 0.3 and 0.1
+261ef08 (HEAD -> main, origin/main) HEAD@{0}: checkout: moving from r/0.1.x to main
+e94280e (tag: 0.1.3, origin/r/0.1.x, r/0.1.x) HEAD@{1}: commit (cherry-pick): merge conflict when cherry-picking 261ef0816060268b9ebfdbed92a4975072036f09, replaced readme.md
+9ae2307 (tag: 0.1.2) HEAD@{2}: checkout: moving from main to r/0.1.x
+261ef08 (HEAD -> main, origin/main) HEAD@{3}: commit: final info to readme.md
+2cff2e6 HEAD@{4}: commit: changed readme.md to utf-8
+ed77465 HEAD@{5}: commit: added git attributes
+fd6d347 HEAD@{6}: checkout: moving from r/0.3.x to main
+b0a2455 (tag: 0.3.1, origin/r/0.3.x, r/0.3.x) HEAD@{7}: cherry-pick: hotfixing 0.3 and 0.1
 04f7438 (tag: 0.3.0) HEAD@{4}: reset: moving to HEAD
 04f7438 (tag: 0.3.0) HEAD@{5}: checkout: moving from 04f7438318e636c35eb432d846399389ad7a2c5a to r/0.3.x
 04f7438 (tag: 0.3.0) HEAD@{6}: checkout: moving from r/0.1.x to 0.3.0
