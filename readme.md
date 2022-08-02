@@ -64,34 +64,36 @@ git log 0.2.0..0.1.3 # show what's on 0.1.3 that is not on 0.2.0
 
 ```js
 ❯ git reflog
-261ef08 (HEAD -> main, origin/main) HEAD@{0}: checkout: moving from r/0.1.x to main
-e94280e (tag: 0.1.3, origin/r/0.1.x, r/0.1.x) HEAD@{1}: commit (cherry-pick): merge conflict when cherry-picking 261ef0816060268b9ebfdbed92a4975072036f09, replaced readme.md
-9ae2307 (tag: 0.1.2) HEAD@{2}: checkout: moving from main to r/0.1.x
-261ef08 (HEAD -> main, origin/main) HEAD@{3}: commit: final info to readme.md
-2cff2e6 HEAD@{4}: commit: changed readme.md to utf-8
-ed77465 HEAD@{5}: commit: added git attributes
-fd6d347 HEAD@{6}: checkout: moving from r/0.3.x to main
-b0a2455 (tag: 0.3.1, origin/r/0.3.x, r/0.3.x) HEAD@{7}: cherry-pick: hotfixing 0.3 and 0.1
-04f7438 (tag: 0.3.0) HEAD@{4}: reset: moving to HEAD
-04f7438 (tag: 0.3.0) HEAD@{5}: checkout: moving from 04f7438318e636c35eb432d846399389ad7a2c5a to r/0.3.x
-04f7438 (tag: 0.3.0) HEAD@{6}: checkout: moving from r/0.1.x to 0.3.0
-9ae2307 (tag: 0.1.2, origin/r/0.1.x, r/0.1.x) HEAD@{7}: cherry-pick: hotfixing 0.3 and 0.1
-ba58520 (tag: 0.1.1) HEAD@{8}: checkout: moving from main to r/0.1.x
-fd6d347 HEAD@{9}: commit: hotfixing 0.3 and 0.1
-a9f043a HEAD@{10}: commit: some more working on 0.4.0
-38429e0 HEAD@{11}: commit: working on 0.4.0
-04f7438 (tag: 0.3.0) HEAD@{12}: commit: add readme.md
-2d7d83c HEAD@{13}: checkout: moving from r/0.1.x to main
-ba58520 (tag: 0.1.1) HEAD@{14}: cherry-pick: hotfix that is required on 0.1.0
-f0c018e (tag: 0.1.0) HEAD@{15}: checkout: moving from main to r/0.1.x
-2d7d83c HEAD@{16}: commit: hotfix that is required on 0.1.0
-2886e96 (tag: 0.2.0) HEAD@{17}: checkout: moving from r/0.1.x to main
-f0c018e (tag: 0.1.0) HEAD@{18}: checkout: moving from f0c018e6143a0f3807d1eccffe7db2f5bb916d75 to r/0.1.x
-f0c018e (tag: 0.1.0) HEAD@{19}: checkout: moving from main to 0.1.0
-2886e96 (tag: 0.2.0) HEAD@{20}: commit: working on release 0.2.0 - some more
-30f3c6d HEAD@{21}: commit: working on release 0.2.0
-f0c018e (tag: 0.1.0) HEAD@{22}: Branch: renamed refs/heads/master to refs/heads/main
-f0c018e (tag: 0.1.0) HEAD@{24}: commit: file 2 added
-468b2c1 (tag: 0.0.1) HEAD@{25}: commit: change txt to md
-84589ea (tag: 0.0.0) HEAD@{26}: commit (initial): init
+2d8fcad (HEAD -> main, origin/main) HEAD@{0}: commit: final info about this repo
+4a562ed HEAD@{1}: commit: info about usage and hardcore cases
+261ef08 HEAD@{2}: checkout: moving from r/0.1.x to main
+e94280e (tag: 0.1.3, origin/r/0.1.x, r/0.1.x) HEAD@{3}: commit (cherry-pick): merge conflict when cherry-picking 261ef0816060268b9ebfdbed92a4975072036f09, replaced readme.md
+9ae2307 (tag: 0.1.2) HEAD@{4}: checkout: moving from main to r/0.1.x
+261ef08 HEAD@{5}: commit: final info to readme.md
+2cff2e6 HEAD@{6}: commit: changed readme.md to utf-8
+ed77465 HEAD@{7}: commit: added git attributes
+fd6d347 HEAD@{8}: checkout: moving from r/0.3.x to main
+b0a2455 (tag: 0.3.1, origin/r/0.3.x, r/0.3.x) HEAD@{9}: cherry-pick: hotfixing 0.3 and 0.1
+04f7438 (tag: 0.3.0) HEAD@{10}: reset: moving to HEAD
+04f7438 (tag: 0.3.0) HEAD@{11}: checkout: moving from 04f7438318e636c35eb432d846399389ad7a2c5a to r/0.3.x
+04f7438 (tag: 0.3.0) HEAD@{12}: checkout: moving from r/0.1.x to 0.3.0
+9ae2307 (tag: 0.1.2) HEAD@{13}: cherry-pick: hotfixing 0.3 and 0.1
+ba58520 (tag: 0.1.1) HEAD@{14}: checkout: moving from main to r/0.1.x
+fd6d347 HEAD@{15}: commit: hotfixing 0.3 and 0.1
+a9f043a HEAD@{16}: commit: some more working on 0.4.0
+38429e0 HEAD@{17}: commit: working on 0.4.0
+04f7438 (tag: 0.3.0) HEAD@{18}: commit: add readme.md
+2d7d83c HEAD@{19}: checkout: moving from r/0.1.x to main
+ba58520 (tag: 0.1.1) HEAD@{20}: cherry-pick: hotfix that is required on 0.1.0
+f0c018e (tag: 0.1.0) HEAD@{21}: checkout: moving from main to r/0.1.x
+2d7d83c HEAD@{22}: commit: hotfix that is required on 0.1.0
+2886e96 (tag: 0.2.0) HEAD@{23}: checkout: moving from r/0.1.x to main
+f0c018e (tag: 0.1.0) HEAD@{24}: checkout: moving from f0c018e6143a0f3807d1eccffe7db2f5bb916d75 to r/0.1.x
+f0c018e (tag: 0.1.0) HEAD@{25}: checkout: moving from main to 0.1.0
+2886e96 (tag: 0.2.0) HEAD@{26}: commit: working on release 0.2.0 - some more
+30f3c6d HEAD@{27}: commit: working on release 0.2.0
+f0c018e (tag: 0.1.0) HEAD@{28}: Branch: renamed refs/heads/master to refs/heads/main
+f0c018e (tag: 0.1.0) HEAD@{30}: commit: file 2 added
+468b2c1 (tag: 0.0.1) HEAD@{31}: commit: change txt to md
+84589ea (tag: 0.0.0) HEAD@{32}: commit (initial): init
 ```
