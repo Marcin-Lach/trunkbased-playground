@@ -18,7 +18,7 @@ For this case, we can use following rules:
 1. Tags must follow [semantic versioning](https://semver.org/) to provide information about expected breaking changes between versions
 1. Every major and minor bump should be done on `main` branch
 1. Every change pushed to remote branch should be buildable, tested and overall working - continuous deployment could be triggered on every push to `main`
-1. If a hotfix is needed, it should be implemented on `main`, then a branch from specific tag should be created (if does not exist already) and hotifx should be cherry-picked from main to the release branch. Then tag should be created on release branch.
+1. If a hotfix is needed, it should be implemented on `main`, then a release branch from specific tag should be created (if does not exist already) and hotifx should be cherry-picked from main to this release branch. Then tag should be created on release branch.
 Example:
     - tag 0.1.0 was created on main and version was released
     - development on main is constantly flowing
